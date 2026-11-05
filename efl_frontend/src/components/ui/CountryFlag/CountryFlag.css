@@ -1,0 +1,31 @@
+.country-flag-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.country-flag-img {
+  display: block;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.country-flag--sm .country-flag-img {
+  width: 16px;
+  height: 11px;
+}
+
+.country-flag--md .country-flag-img {
+  width: 20px;
+  height: 14px;
+}
+
+.country-flag--lg .country-flag-img {
+  width: 26px;
+  height: 18px;
+}

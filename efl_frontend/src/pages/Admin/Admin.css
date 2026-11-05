@@ -1,0 +1,434 @@
+/* ==========================================================================
+   Shared Admin styles — stat cards, panel sections. Tables, forms and modals
+   get added here as those admin pages are built (Tournaments, Teams, etc).
+   ========================================================================== */
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.admin-stat-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+}
+
+.admin-stat-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+}
+
+.admin-stat-card__value {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+}
+
+.admin-stat-card__label {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-panel-section {
+  padding: var(--space-6);
+}
+
+.admin-panel-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.admin-panel-section__header h2 {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+}
+
+.admin-panel-section__link {
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.admin-panel-section__link:hover {
+  color: var(--text-primary);
+}
+
+.admin-approval-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.admin-approval-preview__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--fs-sm);
+}
+
+.admin-approval-preview__row:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   Admin Tables
+   ========================================================================== */
+
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--fs-sm);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table th {
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--fs-xs);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table-actions {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+}
+
+.admin-icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.admin-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.admin-icon-btn--danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* ==========================================================================
+   Admin Modals & Forms
+   ========================================================================== */
+
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
+}
+
+.admin-modal {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: adminModalIn 0.2s ease-out;
+}
+
+@keyframes adminModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.admin-modal-header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-modal-header h2 {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  margin: 0;
+}
+
+.admin-modal-body {
+  padding: var(--space-6);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.admin-modal-footer {
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  background: rgba(255, 255, 255, 0.01);
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* Form Groups */
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.admin-form-group label {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  font-weight: var(--fw-medium);
+}
+
+.admin-input,
+.admin-select,
+.admin-textarea,
+.admin-layout input:not([type="checkbox"]):not([type="radio"]),
+.admin-layout textarea,
+.admin-layout select {
+  width: 100%;
+  padding: var(--space-3);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  transition: border-color var(--transition-fast);
+}
+
+.admin-input:focus,
+.admin-select:focus,
+.admin-textarea:focus,
+.admin-layout input:focus,
+.admin-layout textarea:focus,
+.admin-layout select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.admin-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: var(--space-2);
+  transition: color var(--transition-fast);
+}
+
+.admin-back-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Hide number input spinners/arrows */
+.admin-input[type="number"]::-webkit-inner-spin-button,
+.admin-input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.admin-input[type="number"],
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.admin-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  background-size: 16px;
+  padding-right: var(--space-10);
+}
+
+.admin-select option {
+  background-color: var(--bg-surface, #141414);
+  color: var(--text-primary, #ffffff);
+}
+
+/* Button variants inside admin */
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.admin-btn-primary {
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700;
+  border: 1px solid #ffffff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.12);
+}
+
+.admin-btn-primary:hover {
+  background: #f0f0f0 !important;
+  border-color: #f0f0f0;
+  color: #000000 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.22);
+}
+
+.admin-btn-primary:active {
+  transform: translateY(0);
+}
+
+.admin-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.admin-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   Admin Teams KPI Cards
+   ========================================================================== */
+
+.admin-teams-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.admin-teams-kpi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px 18px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  min-height: 76px;
+  transition: border-color var(--transition-fast);
+}
+
+.admin-teams-kpi-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.admin-teams-kpi-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.admin-teams-kpi-value {
+  font-size: 1.5rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+  .admin-teams-kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-teams-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+

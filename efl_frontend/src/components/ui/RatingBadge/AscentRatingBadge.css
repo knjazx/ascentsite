@@ -1,0 +1,112 @@
+/* ==========================================================================
+   ASCENT Rating Badge (HLTV / CS2 Rating 2.0 / 3.0 Style)
+   ========================================================================== */
+
+.ascent-rating-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 52px;
+  height: 27px;
+  border-radius: 4px;
+  overflow: hidden;
+  user-select: none;
+  font-family: 'Rajdhani', 'Chakra Petch', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.ascent-rating-badge__value {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  padding-bottom: 2px;
+}
+
+.ascent-rating-badge__track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.ascent-rating-badge__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Red Tier (0.00 - 0.89) ──────────────────────────────────────────────── */
+.ascent-rating-badge--red {
+  background-color: rgba(239, 68, 68, 0.16);
+  border: 1px solid rgba(239, 68, 68, 0.24);
+}
+.ascent-rating-badge--red .ascent-rating-badge__value {
+  color: #ef4444;
+}
+.ascent-rating-badge--red .ascent-rating-badge__bar {
+  background-color: #ef4444;
+}
+
+/* ── Gray Tier (0.90 - 1.29) ─────────────────────────────────────────────── */
+.ascent-rating-badge--gray {
+  background-color: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.ascent-rating-badge--gray .ascent-rating-badge__value {
+  color: #ffffff;
+}
+.ascent-rating-badge--gray .ascent-rating-badge__bar {
+  background-color: #ffffff;
+}
+
+/* ── Green Tier (1.30 - 1.79) ────────────────────────────────────────────── */
+.ascent-rating-badge--green {
+  background-color: rgba(34, 197, 94, 0.16);
+  border: 1px solid rgba(34, 197, 94, 0.24);
+}
+.ascent-rating-badge--green .ascent-rating-badge__value {
+  color: #4ade80;
+}
+.ascent-rating-badge--green .ascent-rating-badge__bar {
+  background-color: #4ade80;
+}
+
+/* ── Gold / Yellow Tier (1.80+) ──────────────────────────────────────────── */
+.ascent-rating-badge--gold {
+  background-color: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.16);
+}
+.ascent-rating-badge--gold .ascent-rating-badge__value {
+  color: #fbbf24;
+  text-shadow: 0 0 6px rgba(251, 191, 36, 0.35);
+}
+.ascent-rating-badge--gold .ascent-rating-badge__bar {
+  background-color: #fbbf24;
+}
+
+/* Optional Sizes */
+.ascent-rating-badge--sm {
+  width: 44px;
+  height: 23px;
+}
+.ascent-rating-badge--sm .ascent-rating-badge__value {
+  font-size: 11.5px;
+}
+
+.ascent-rating-badge--lg {
+  width: 64px;
+  height: 32px;
+}
+.ascent-rating-badge--lg .ascent-rating-badge__value {
+  font-size: 15px;
+}

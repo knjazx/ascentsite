@@ -1,0 +1,792 @@
+/* ==========================================================================
+   Admin Market Page & Lot Creation Modal Styles
+   ========================================================================== */
+
+/* Main Header Button: Создать лот */
+.market-btn-create-lot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.18);
+  transition: all var(--transition-fast);
+}
+
+.market-btn-create-lot:hover {
+  background-color: #f0f0f0 !important;
+  border-color: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.28);
+}
+
+.market-btn-create-lot:active {
+  transform: translateY(0);
+}
+
+/* Modal Overlay */
+.market-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
+  animation: marketModalFadeIn 0.2s ease-out;
+}
+
+@keyframes marketModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Card */
+.market-create-modal {
+  background: #11141a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 660px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  animation: marketModalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes marketModalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header */
+.market-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.market-modal-header__info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.market-modal-header__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.market-modal-header__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.market-modal-header__subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 4px 0 0 0;
+}
+
+.market-modal-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.market-modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Form Body */
+.market-modal-form {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.market-modal-body {
+  padding: 22px 24px;
+  overflow-y: auto;
+  max-height: calc(90vh - 160px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.market-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.market-modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.market-modal-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.market-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.market-form-row {
+  display: flex;
+  gap: 14px;
+}
+
+.market-form-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.market-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.market-input:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+.market-textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-family: inherit;
+}
+
+/* Icon / Emoji Field */
+.market-icon-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.market-icon-input {
+  padding-right: 36px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.market-icon-preview {
+  position: absolute;
+  right: 12px;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* Quick Emoji Chips */
+.market-emoji-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-top: 2px;
+}
+
+.market-emoji-chips__label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-right: 4px;
+}
+
+.market-emoji-chip {
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  line-height: 1.2;
+}
+
+.market-emoji-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.market-emoji-chip.active {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Pricing Grid */
+.market-pricing-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 14px;
+}
+
+.market-input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.market-input-with-icon svg {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+}
+
+.market-input-with-icon input {
+  padding-left: 36px;
+}
+
+/* Price Preview Banner */
+.market-price-preview-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  font-size: 12.5px;
+}
+
+.market-price-preview-banner__label {
+  color: var(--text-secondary);
+}
+
+.market-price-preview-banner__val {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.market-price-preview-banner__badge {
+  margin-left: auto;
+  padding: 2px 8px;
+  background: rgba(34, 197, 94, 0.16);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 4px;
+  color: #4ade80;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Specifications Box */
+.market-specs-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.market-specs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.market-specs-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  display: block;
+}
+
+.market-specs-subtitle {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin: 2px 0 0 0;
+}
+
+.market-specs-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.market-specs-add-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.market-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 160px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.market-specs-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.market-specs-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.market-spec-row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.market-spec-input {
+  padding: 8px 10px;
+  font-size: 12.5px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+}
+
+.market-spec-remove-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.market-spec-remove-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Modal Footer */
+.market-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.market-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.market-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.market-btn-publish {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.18);
+  transition: all var(--transition-fast);
+}
+
+.market-btn-publish:hover {
+  background-color: #f0f0f0 !important;
+  border-color: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.3);
+}
+
+.market-btn-publish:active {
+  transform: translateY(0);
+}
+
+/* Edit action button */
+.admin-icon-btn--edit {
+  color: var(--text-secondary);
+}
+
+.admin-icon-btn--edit:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Table Duration Pills */
+.market-discount-duration-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.market-discount-duration-pill--active {
+  background: rgba(59, 130, 246, 0.14);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.market-discount-duration-pill--forever {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.market-discount-duration-pill--expired {
+  background: rgba(239, 68, 68, 0.14);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* Discount Duration Configuration Box in Modal */
+.market-discount-duration-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+  animation: marketDurationBoxFade 0.2s ease-out;
+}
+
+@keyframes marketDurationBoxFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.market-discount-duration-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.market-discount-duration-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.market-discount-duration-title svg {
+  color: #60a5fa;
+}
+
+.market-discount-duration-hint {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Duration Presets */
+.market-duration-presets {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.market-duration-preset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.market-duration-preset-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.market-duration-preset-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+.market-duration-custom-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   Admin Orders Queue Styles & Notification Banner
+   ========================================================================== */
+
+.admin-orders-alert-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.12), rgba(234, 179, 8, 0.05));
+  border: 1px solid rgba(234, 179, 8, 0.35);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  animation: marketModalFadeIn 0.3s ease-out;
+}
+
+.admin-orders-alert-banner__content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-orders-alert-banner__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: #eab308;
+  color: #000000;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.admin-orders-alert-banner__content strong {
+  display: block;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.admin-orders-alert-banner__content p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.admin-orders-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  margin-left: 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  background-color: #eab308;
+  color: #000000;
+}
+
+.admin-orders-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-orders-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-orders-filter-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.admin-orders-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.admin-orders-filter-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  font-weight: 700;
+}
+
+.admin-orders-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 6px 12px;
+  min-width: 260px;
+}
+
+.admin-orders-search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 12px;
+  width: 100%;
+}
+
+.admin-orders-search-box input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.admin-buyer-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.admin-buyer-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-buyer-sub {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.admin-buyer-steam-link {
+  font-size: 10px;
+  color: #60a5fa;
+  text-decoration: underline;
+  margin-top: 1px;
+}
+

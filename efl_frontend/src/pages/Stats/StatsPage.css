@@ -1,0 +1,305 @@
+/* ==========================================================================
+   Stats Page (Teams & Players Combined)
+   ========================================================================== */
+
+.stats-page {
+  padding: var(--space-8) 0;
+}
+
+.stats-page__breadcrumb {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-4);
+}
+
+.stats-page__breadcrumb a {
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.stats-page__breadcrumb a:hover {
+  color: var(--text-primary);
+}
+
+.stats-page__breadcrumb span {
+  color: var(--text-secondary);
+}
+
+.stats-nav-tabs {
+  margin-top: 0;
+  margin-bottom: var(--space-6);
+}
+
+/* ==========================================================================
+   Podium Accents (Shared by Teams & Players)
+   ========================================================================== */
+
+.team-row--first,
+.hltv-row--first {
+  border-left: 3px solid #fbbf24 !important;
+}
+
+.team-row--second,
+.hltv-row--second {
+  border-left: 3px solid #e2e8f0 !important;
+}
+
+.team-row--third,
+.hltv-row--third {
+  border-left: 3px solid #f59e0b !important;
+}
+
+.rank-gold {
+  color: #fbbf24 !important;
+  font-weight: var(--fw-bold) !important;
+}
+
+.rank-silver {
+  color: #e2e8f0 !important;
+  font-weight: var(--fw-bold) !important;
+}
+
+.rank-bronze {
+  color: #f59e0b !important;
+  font-weight: var(--fw-bold) !important;
+}
+
+/* ==========================================================================
+   HLTV-Style Players Table (Stats Page)
+   Strictly matches HLTV stats leaderboard reference
+   ========================================================================== */
+
+.hltv-table-wrap {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hltv-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+  table-layout: fixed;
+  font-family: inherit;
+}
+
+/* Header */
+.hltv-table thead {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hltv-th {
+  padding: 12px 14px;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  text-align: left;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.hltv-th:last-child {
+  border-right: none;
+}
+
+/* Proportional Column Distribution — stretched to the left */
+.hltv-th--rank,
+.hltv-cell--rank {
+  width: 5%;
+  text-align: center;
+}
+
+.hltv-cell--rank {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+}
+
+.hltv-th--player,
+.hltv-cell--player {
+  width: 23%;
+  text-align: left;
+}
+
+.hltv-th--team,
+.hltv-cell--team {
+  width: 14%;
+  text-align: center;
+}
+
+.hltv-th--maps,
+.hltv-cell--maps {
+  width: 11%;
+  text-align: center;
+}
+
+.hltv-th--rounds,
+.hltv-cell--rounds {
+  width: 11%;
+  text-align: center;
+}
+
+.hltv-th--diff,
+.hltv-cell--diff {
+  width: 12%;
+  text-align: center;
+}
+
+.hltv-th--kd,
+.hltv-cell--kd {
+  width: 11%;
+  text-align: center;
+}
+
+.hltv-th--rating,
+.hltv-cell--rating {
+  width: 13%;
+  text-align: center;
+}
+
+.hltv-th--center {
+  text-align: center;
+}
+
+.hltv-th--sortable {
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.hltv-th--sortable:hover,
+.hltv-th--active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hltv-th__inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Rows & Cells */
+.hltv-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color var(--transition-fast);
+}
+
+.hltv-row:last-child {
+  border-bottom: none;
+}
+
+.hltv-row:hover {
+  background-color: var(--bg-panel-hover);
+}
+
+.hltv-cell {
+  padding: 11px 14px;
+  vertical-align: middle;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+}
+
+.hltv-cell:last-child {
+  border-right: none;
+}
+
+.hltv-player-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hltv-player-link:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.hltv-player-flag {
+  font-size: 1.15rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hltv-player-name {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.hltv-team-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.hltv-team-link:hover {
+  opacity: 0.85;
+  transform: scale(1.1);
+}
+
+.hltv-cell--team .team-logo {
+  width: 2.35rem; /* ~38px */
+  height: 2.35rem; /* ~38px */
+  border-radius: var(--radius-md);
+  margin: 0 auto;
+}
+
+.hltv-cell--center {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.hltv-diff--pos {
+  color: #22c55e !important;
+  font-weight: 700;
+}
+
+.hltv-diff--neg {
+  color: #ef4444 !important;
+  font-weight: 700;
+}
+
+.hltv-diff--zero {
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.hltv-cell--rating .ascent-rating-badge {
+  width: 58px;
+  height: 29px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.hltv-cell--rating .ascent-rating-badge__value {
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.hltv-cell--rating .ascent-rating-badge__track {
+  height: 3px;
+}
+
+.hltv-empty {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-secondary);
+  font-size: var(--fs-base);
+}

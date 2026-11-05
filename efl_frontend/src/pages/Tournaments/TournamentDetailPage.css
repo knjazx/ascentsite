@@ -1,0 +1,672 @@
+.tournament-detail-page {
+  padding: var(--space-8) 0;
+}
+
+/* Header */
+
+.tournament-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: var(--space-8);
+}
+
+.tournament-detail-header__body {
+  min-width: 0;
+}
+
+.tournament-detail-header__type {
+  display: block;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tournament-detail-header__title {
+  margin-top: var(--space-2);
+  font-size: clamp(2.25rem, 1.5rem + 2.5vw, 3.75rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.tournament-detail-header__tagline {
+  margin-top: var(--space-4);
+  max-width: 640px;
+}
+
+.tournament-detail-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .tournament-detail-header {
+    flex-direction: column;
+  }
+
+  .tournament-detail-header__meta {
+    gap: var(--space-4);
+  }
+}
+
+/* Tabs row */
+
+.tournament-detail-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.tournament-detail-tabs__list {
+  margin-bottom: 0;
+  overflow-x: auto;
+}
+
+.tournament-detail-tabs__share {
+  flex-shrink: 0;
+}
+
+/* Overview layout */
+
+.overview-tab {
+  display: grid;
+  grid-template-columns: 1fr 2.4fr 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.overview-tab__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+  height: 100%;
+}
+
+.overview-tab__col--left .overview-panel--about {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-tab__col--left .overview-panel--about .overview-panel__badges {
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+.overview-tab__col--right .overview-panel {
+  height: 100%;
+}
+
+.overview-tab__teams {
+  grid-column: 1 / 3;
+}
+
+.overview-tab__stage {
+  grid-column: 3;
+}
+
+@media (max-width: 1100px) {
+  .overview-tab {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-tab__teams,
+  .overview-tab__stage {
+    grid-column: 1 / -1;
+  }
+}
+
+.overview-panel {
+  padding: var(--space-6);
+}
+
+.overview-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.overview-panel__title {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.overview-panel__header .overview-panel__title {
+  margin-bottom: 0;
+}
+
+.overview-panel__text {
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-sm);
+}
+
+.overview-panel__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.overview-badge {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.overview-panel--prize {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 110px;
+}
+
+.overview-panel__prize-content {
+  position: relative;
+  z-index: 1;
+}
+
+.overview-panel__prize-icon {
+  position: absolute;
+  right: var(--space-3);
+  bottom: -15px;
+  color: var(--text-primary);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.overview-panel__prize {
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-bold);
+}
+
+.overview-panel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.overview-panel__link:hover {
+  color: var(--text-primary);
+}
+
+/* Tournament info rows */
+
+.info-rows__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--fs-sm);
+}
+
+.info-rows__row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Stage progress */
+
+.stage-progress__item {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stage-progress__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.stage-progress__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.stage-progress__label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.stage-progress__dates {
+  display: block;
+  font-size: var(--fs-xs);
+  margin-top: var(--space-1);
+}
+
+.stage-progress__status {
+  flex-shrink: 0;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+
+.stage-progress__status--in-progress {
+  color: var(--accent-positive);
+}
+
+.stage-progress__bar {
+  margin-top: var(--space-3);
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--border-color);
+  overflow: hidden;
+}
+
+.stage-progress__bar-fill {
+  width: 45%;
+  height: 100%;
+  background-color: var(--text-primary);
+}
+
+/* Bracket preview — CSS Grid bracket. BracketPreview.tsx computes explicit
+   gridColumn/gridRow for every box and connector, and the header labels share the
+   exact same gridTemplateColumns — so labels always line up with their column,
+   and connector lines are exact (25%/75% split) no matter how deep the tree is. */
+
+.bracket-preview {
+  overflow-x: auto;
+}
+
+.bracket-grid {
+  display: grid;
+  column-gap: 0;
+  row-gap: var(--space-2);
+  min-width: max-content;
+}
+
+.bracket-header-label {
+  align-self: end;
+  padding-bottom: var(--space-3);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.bracket-box {
+  align-self: center;
+  min-width: 130px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bracket-box--seed {
+  text-align: left;
+}
+
+.bracket-box--match {
+  color: var(--text-tertiary);
+}
+
+.bracket-box--final {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+}
+
+/* Each connector cell is stretched to span exactly its two children's combined row range.
+   Their centers always sit at 25% / 75% of that range (true at every depth, since every
+   box is centered within its own span) — so the merge shape only needs fixed percentages,
+   no per-level pixel math. */
+
+.bracket-connector {
+  position: relative;
+  height: 100%;
+}
+
+.bracket-connector__merge {
+  position: absolute;
+  left: 0;
+  top: 25%;
+  width: 50%;
+  height: 50%;
+  border-top: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0 4px 4px 0;
+}
+
+.bracket-connector::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+/* Teams grid (Overview + Teams tab) */
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 1200px) {
+  .teams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
+
+.team-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.team-tile:hover {
+  background-color: var(--bg-panel-hover);
+  border-color: var(--border-color-strong);
+}
+
+.team-tile__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-panel-hover);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.team-tile__name {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.team-tile--more {
+  justify-content: center;
+  cursor: pointer;
+}
+
+.team-tile--more:hover {
+  border-color: var(--border-color-strong);
+}
+
+.team-tile__more-count {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+}
+
+.bracket-preview__note {
+  margin-top: var(--space-6);
+}
+
+.teams-tab__note {
+  margin-bottom: var(--space-4);
+}
+
+/* Shared placeholder tab */
+
+.tab-placeholder {
+  padding: var(--space-8);
+  margin-top: var(--space-6);
+  text-align: center;
+}
+
+.tab-placeholder__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-2);
+}
+
+/* Schedule / Results */
+
+.match-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.match-list__row {
+  display: grid;
+  grid-template-columns: 220px 1fr 180px;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.match-list__row:last-child {
+  border-bottom: none;
+}
+
+.match-list__stage {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.match-list__teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  font-weight: var(--fw-medium);
+  width: 100%;
+}
+
+.match-list__team {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: var(--fw-semibold);
+}
+
+.match-list__team--a {
+  text-align: right;
+}
+
+.match-list__team--b {
+  text-align: left;
+}
+
+.match-list__vs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.65rem;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  background-color: var(--bg-panel-hover);
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.match-list__score {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+  padding: 0.25rem 0.75rem;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  background: var(--bg-panel-hover);
+  border: 1px solid var(--border-color-strong);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.match-list__when {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  font-size: var(--fs-xs);
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .match-list__row {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-3);
+  }
+
+  .match-list__stage {
+    text-align: center;
+  }
+
+  .match-list__team--a {
+    text-align: center;
+  }
+
+  .match-list__team--b {
+    text-align: center;
+  }
+
+  .match-list__when {
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    gap: var(--space-3);
+  }
+}
+
+/* Standings */
+
+.standings-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.standings-table-wrapper {
+  overflow-x: auto;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  font-size: var(--fs-sm);
+}
+
+.standings-table th {
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-3);
+}
+
+.standings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.standings-table tbody tr {
+  transition: background-color var(--transition-fast);
+}
+
+.standings-table tbody tr:hover {
+  background-color: var(--bg-panel-hover);
+}
+
+.standings-table__col-team {
+  width: 44%;
+  text-align: left !important;
+}
+
+.standings-table__col-stat {
+  width: 12%;
+  text-align: center !important;
+}
+
+.standings-table__col-maps {
+  width: 20%;
+  text-align: center !important;
+}
+
+.standings-table__team-name {
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.standings-table__pts {
+  color: var(--text-primary);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-base);
+}
+
+/* Rules */
+
+.rules-list__section {
+  margin-bottom: var(--space-6);
+}
+
+.rules-list__section:last-child {
+  margin-bottom: 0;
+}
+
+.rules-list__title {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.rules-list__text {
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-2);
+}
+
+.rules-list__text:last-child {
+  margin-bottom: 0;
+}

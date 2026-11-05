@@ -1,0 +1,165 @@
+.register-page {
+  padding: var(--space-8) 0;
+}
+
+.register-page__header {
+  margin-bottom: var(--space-8);
+}
+
+.register-page__title {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+}
+
+.register-page__subtitle {
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: auto;
+}
+
+.form-section {
+  padding: var(--space-6);
+}
+
+.form-section__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-6);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.register-form__submit {
+  max-width: auto;
+}
+
+.register-success {
+  padding: var(--space-8);
+  max-width: auto;
+}
+
+/* Logo upload */
+
+.logo-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.logo-upload__dropzone {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--text-tertiary);
+  transition: border-color var(--transition-fast);
+}
+
+.logo-upload__dropzone:hover {
+  border-color: var(--text-secondary);
+}
+
+.logo-upload__preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-upload__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.logo-upload__remove {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: fit-content;
+  font-size: var(--fs-xs);
+  color: var(--accent-negative);
+}
+
+/* Roster */
+
+.roster-group {
+  margin-bottom: var(--space-6);
+}
+
+.roster-group:last-child {
+  margin-bottom: 0;
+}
+
+.roster-group__title {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-4);
+}
+
+.roster-player {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr 1fr 1.5rem;
+  align-items: start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.roster-player__index {
+  padding-top: var(--space-3);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-tertiary);
+}
+
+.roster-player__field {
+  margin-bottom: 0;
+}
+
+.roster-player__remove {
+  padding-top: var(--space-3);
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.roster-player__remove:hover {
+  color: var(--accent-negative);
+}
+
+@media (max-width: 640px) {
+  .roster-player {
+    grid-template-columns: 1.5rem 1fr auto;
+    grid-template-areas:
+      'index nickname remove'
+      'index steam steam';
+  }
+}
+
+.roster-add-btn {
+  margin-top: var(--space-2);
+  width: fit-content;
+}

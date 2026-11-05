@@ -1,0 +1,227 @@
+/* ==========================================================================
+   Admin Layout — Sidebar + Content
+   ========================================================================== */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────────────── */
+
+.admin-sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background-color: var(--bg-panel);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-header);
+  overflow-y: auto;
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-sidebar__logo-mark {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.05em;
+}
+
+.admin-sidebar__logo-text {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.05em;
+}
+
+.admin-sidebar__nav {
+  flex: 1;
+  padding: var(--space-4) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar__section-label {
+  font-size: 0.65rem;
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  padding: var(--space-4) var(--space-6) var(--space-2);
+}
+
+.admin-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admin-sidebar__link:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-panel-hover);
+}
+
+.admin-sidebar__link.active {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left-color: var(--text-primary);
+}
+
+.admin-sidebar__link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.admin-sidebar__link.active svg,
+.admin-sidebar__link:hover svg {
+  opacity: 1;
+}
+
+.admin-sidebar__badge {
+  margin-left: auto;
+  background-color: var(--accent-negative);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: var(--fw-bold);
+  padding: 1px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* ── Sidebar Footer (Admin Profile) ────────────────────────────────────── */
+
+.admin-sidebar__footer {
+  border-top: 1px solid var(--border-color);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.admin-sidebar__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: white;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-sidebar__user-name {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-sidebar__user-role {
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+
+/* ── Content Area ──────────────────────────────────────────────────────── */
+
+.admin-content {
+  flex: 1;
+  margin-left: 240px;
+  min-height: 100vh;
+}
+
+.admin-content__inner {
+  padding: var(--space-8);
+  max-width: 1400px;
+}
+
+/* ── Page Header ───────────────────────────────────────────────────────── */
+
+.admin-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.admin-page-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.admin-page-header h1 {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+}
+
+.admin-page-header__subtitle {
+  display: none;
+}
+
+.admin-page-header__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* ── Back to site link ─────────────────────────────────────────────────── */
+
+.admin-back-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.admin-back-link:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-panel-hover);
+}
+
+.admin-back-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}

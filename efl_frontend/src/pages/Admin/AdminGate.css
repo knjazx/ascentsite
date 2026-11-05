@@ -1,0 +1,103 @@
+.admin-gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  padding: var(--space-6);
+}
+
+.admin-gate__card {
+  width: 100%;
+  max-width: 380px;
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.admin-gate__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+}
+
+.admin-gate__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+}
+
+.admin-gate__text {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.admin-gate__btn {
+  width: 100%;
+}
+
+.admin-gate__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.admin-gate__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-gate__input-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.admin-gate__input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.admin-gate__input:focus {
+  border-color: var(--primary-color);
+}
+
+.admin-gate__error {
+  font-size: var(--fs-xs);
+  color: #ef4444;
+  margin: 0;
+  text-align: left;
+}
+
+.admin-gate__back-container {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-color);
+}
+
+.admin-gate__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.admin-gate__back-link:hover {
+  color: var(--primary-color);
+}
