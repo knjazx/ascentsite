@@ -196,9 +196,9 @@
 .team-expanded-player__photo-wrap {
   width: 100%;
   aspect-ratio: 1 / 1.15;
-  background: #18181b;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
   overflow: hidden;
   display: flex;
   align-items: center;

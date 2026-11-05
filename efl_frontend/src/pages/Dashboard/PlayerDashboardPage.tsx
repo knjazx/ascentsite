@@ -419,13 +419,13 @@ const PlayerDashboardPage: React.FC = () => {
                 <CountryFlag code={formData.country} size="md" />
                 <h1 className="pp-nickname">{formData.nickname}</h1>
                 {formData.teamName && (
-                  <span className="pp-meta-tag" style={{ color: 'var(--accent-neutral)' }}>
+                  <span className="pp-meta-tag">
                     <Shield size={13} />
                     <span>{formData.teamName}</span>
                   </span>
                 )}
                 {currentUser.isSteamVerified && (
-                  <span className="pp-meta-tag" style={{ color: '#66c0f4', borderColor: 'rgba(102, 192, 244, 0.3)' }}>
+                  <span className="pp-meta-tag">
                     <SteamIcon size={13} />
                     <span>Steam Verified</span>
                   </span>

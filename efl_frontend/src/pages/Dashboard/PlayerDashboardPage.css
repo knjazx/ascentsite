@@ -359,8 +359,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.25rem;
-  background: linear-gradient(135deg, rgba(27, 40, 56, 0.8) 0%, rgba(42, 71, 94, 0.4) 100%);
-  border: 1px solid #2a475e;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   flex-wrap: wrap;
   gap: 1rem;
