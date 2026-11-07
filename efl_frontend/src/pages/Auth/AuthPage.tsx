@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link, useNavigate } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
-import { useData } from '@/context/DataContext';
-import { useToast } from '@/context/ToastContext';
+import { redirectToSteam } from '@/utils/steamAuth';
 import './AuthPage.css';
 
 type AuthTab = 'login' | 'signup';
@@ -13,9 +12,6 @@ interface AuthPageProps {
 
 const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const { loginWithSteam } = useData();
-  const { showToast } = useToast();
 
   const queryTab = searchParams.get('tab') as AuthTab | null;
   const initialTab: AuthTab =
@@ -41,35 +37,10 @@ const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
     setSearchParams({ tab: newTab });
   };
 
-  const handleSteamAuth = async () => {
+  const handleSteamAuth = () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
-
-    // Natural brief auth loading state
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    // Sign in directly via Steam without account selection modal
-    const user = loginWithSteam({
-      nickname: 'BlazeMaster',
-      realName: 'Alexander Vance',
-      steamId: '76561198299104812',
-      avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
-      country: 'ru',
-      teamName: 'Phoenix Rising',
-      teamSlug: 'phoenix-rising',
-      role: 'captain',
-    });
-
-    setIsSubmitting(false);
-
-    showToast(
-      tab === 'signup'
-        ? `Профиль успешно создан через Steam! Добро пожаловать, ${user.nickname}!`
-        : `Успешный вход через Steam! Добро пожаловать, ${user.nickname}!`,
-      'success'
-    );
-
-    navigate('/profile');
+    redirectToSteam();
   };
 
   return (

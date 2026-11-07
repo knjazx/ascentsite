@@ -4,6 +4,7 @@ import { Shield, User } from 'lucide-react';
 import { useToast } from '@/context/ToastContext';
 import { useData } from '@/context/DataContext';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
+import { redirectToSteam } from '@/utils/steamAuth';
 
 interface LoginFormValues {
   email: string;
@@ -45,7 +46,7 @@ const LoginForm: React.FC = () => {
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const { showToast } = useToast();
-  const { loginUser, loginWithSteam } = useData();
+  const { loginUser } = useData();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,18 +104,7 @@ const LoginForm: React.FC = () => {
         type="button"
         className="steam-main-auth-btn"
         onClick={() => {
-          loginWithSteam({
-            nickname: 'BlazeMaster',
-            realName: 'Alexander Vance',
-            steamId: '76561198299104812',
-            avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
-            country: 'ru',
-            teamName: 'Phoenix Rising',
-            teamSlug: 'phoenix-rising',
-            role: 'captain',
-          });
-          showToast('Успешный вход через Steam!', 'success');
-          navigate('/profile');
+          redirectToSteam();
         }}
       >
         <SteamIcon size={20} />

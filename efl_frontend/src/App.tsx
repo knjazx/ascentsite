@@ -5,6 +5,7 @@ import Layout from "./components/Layout/Layout";
 
 import Home from "./pages/Home/Home";
 import AuthPage from "./pages/Auth/AuthPage";
+import SteamCallbackPage from "./pages/Auth/SteamCallbackPage";
 import TeamRegistrationPage from "./pages/TeamRegistration/TeamRegistrationPage";
 import TournamentsListPage from "./pages/Tournaments/TournamentsListPage";
 import TournamentDetailPage from "./pages/Tournaments/TournamentDetailPage";
@@ -47,6 +48,7 @@ function App() {
           <Route path="/login" element={<AuthPage />} />
           <Route path="/signup" element={<AuthPage defaultTab="signup" />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/auth/steam/callback" element={<SteamCallbackPage />} />
           <Route path="/profile" element={<PlayerDashboardPage />} />
           <Route path="/dashboard" element={<PlayerDashboardPage />} />
           <Route path="/register" element={<TeamRegistrationPage />} />

@@ -27,6 +27,7 @@ import { useToast } from '@/context/ToastContext';
 import CoinIcon from '@/components/ui/CoinIcon/CoinIcon';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
 import CountryFlag from '@/components/ui/CountryFlag/CountryFlag';
+import { redirectToSteam } from '@/utils/steamAuth';
 import './PlayerDashboardPage.css';
 
 type DashboardTab = 'overview' | 'profile' | 'config' | 'gear' | 'accounts' | 'matches';
@@ -83,7 +84,7 @@ const PRESET_AVATARS = [
 ];
 
 const PlayerDashboardPage: React.FC = () => {
-  const { currentUser, loginWithSteam, logoutUser, updateUserProfile, teams, matches, openWallet, marketBalance } = useData();
+  const { currentUser, logoutUser, updateUserProfile, teams, matches, openWallet, marketBalance } = useData();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const avatarFileInputRef = useRef<HTMLInputElement>(null);
@@ -360,24 +361,14 @@ const PlayerDashboardPage: React.FC = () => {
                 className="steam-main-auth-btn"
                 style={{ width: 'auto', padding: '0.65rem 1.5rem' }}
                 onClick={() => {
-                  loginWithSteam({
-                    nickname: 'BlazeMaster',
-                    realName: 'Alexander Vance',
-                    steamId: '76561198299104812',
-                    avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
-                    country: 'ru',
-                    teamName: 'Phoenix Rising',
-                    teamSlug: 'phoenix-rising',
-                    role: 'captain',
-                  });
-                  showToast('Успешный вход через Steam!', 'success');
+                  redirectToSteam('/profile');
                 }}
               >
                 <SteamIcon size={20} />
                 <span>Войти через Steam</span>
               </button>
               <Link to="/login" className="btn-outline" style={{ display: 'inline-flex', padding: '0.65rem 1.25rem' }}>
-                Вход по почте
+                Страница входа
               </Link>
             </div>
           </div>
