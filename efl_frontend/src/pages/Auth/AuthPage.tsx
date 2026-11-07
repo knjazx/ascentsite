@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
-import SteamAuthModal from './components/SteamAuthModal';
+import { useData } from '@/context/DataContext';
+import { useToast } from '@/context/ToastContext';
 import './AuthPage.css';
 
 type AuthTab = 'login' | 'signup';
@@ -12,6 +13,10 @@ interface AuthPageProps {
 
 const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { loginWithSteam } = useData();
+  const { showToast } = useToast();
+
   const queryTab = searchParams.get('tab') as AuthTab | null;
   const initialTab: AuthTab =
     queryTab === 'signup' || defaultTab === 'signup' || window.location.pathname === '/signup'
@@ -19,7 +24,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
       : 'login';
 
   const [tab, setTab] = useState<AuthTab>(initialTab);
-  const [isModalOpen, setIsModalOpen] = useState(searchParams.get('modal') === '1');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (queryTab === 'signup' || queryTab === 'login') {
@@ -36,6 +41,37 @@ const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
     setSearchParams({ tab: newTab });
   };
 
+  const handleSteamAuth = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    // Natural brief auth loading state
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // Sign in directly via Steam without account selection modal
+    const user = loginWithSteam({
+      nickname: 'BlazeMaster',
+      realName: 'Alexander Vance',
+      steamId: '76561198299104812',
+      avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
+      country: 'ru',
+      teamName: 'Phoenix Rising',
+      teamSlug: 'phoenix-rising',
+      role: 'captain',
+    });
+
+    setIsSubmitting(false);
+
+    showToast(
+      tab === 'signup'
+        ? `Профиль успешно создан через Steam! Добро пожаловать, ${user.nickname}!`
+        : `Успешный вход через Steam! Добро пожаловать, ${user.nickname}!`,
+      'success'
+    );
+
+    navigate('/profile');
+  };
+
   return (
     <section className="inride-auth-page">
       <div className="inride-auth-container">
@@ -47,7 +83,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
             </h1>
             <p className="inride-auth-sub">
               {tab === 'signup'
-                ? 'Выберите игровой аккаунт, с которым хотите создать профиль ASCENT.'
+                ? 'Создайте соревновательный профиль ASCENT через свой аккаунт Steam.'
                 : 'Войдите в свой соревновательный профиль с помощью аккаунта Steam.'}
             </p>
           </div>
@@ -70,16 +106,19 @@ const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
             </button>
           </div>
 
-          {/* Steam Action Button (Only Steam, without checkboxes) */}
+          {/* Steam Action Button (Direct Normal Login) */}
           <div className="inride-auth-actions">
             <button
               type="button"
               className="inride-steam-btn"
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleSteamAuth}
+              disabled={isSubmitting}
             >
               <SteamIcon size={20} className="inride-steam-icon" />
               <span>
-                {tab === 'signup'
+                {isSubmitting
+                  ? 'Авторизация в Steam...'
+                  : tab === 'signup'
                   ? 'Создать профиль через Steam'
                   : 'Войти через Steam'}
               </span>
@@ -104,13 +143,6 @@ const AuthPage: React.FC<AuthPageProps> = ({ defaultTab }) => {
           </div>
         </div>
       </div>
-
-      {/* Official Steam OpenID Modal Window */}
-      <SteamAuthModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        isRegister={tab === 'signup'}
-      />
     </section>
   );
 };

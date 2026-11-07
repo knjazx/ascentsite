@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from '@/context/ToastContext';
 import { useData } from '@/context/DataContext';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
-import SteamAuthModal from './components/SteamAuthModal';
 
 interface SignUpFormValues {
   username: string;
@@ -61,9 +60,8 @@ const SignUpForm: React.FC = () => {
   const [values, setValues] = useState<SignUpFormValues>(initialValues);
   const [errors, setErrors] = useState<SignUpFormErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [showSteamModal, setShowSteamModal] = useState(false);
   const { showToast } = useToast();
-  const { loginUser } = useData();
+  const { loginUser, loginWithSteam } = useData();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -100,7 +98,20 @@ const SignUpForm: React.FC = () => {
       <button
         type="button"
         className="steam-main-auth-btn"
-        onClick={() => setShowSteamModal(true)}
+        onClick={() => {
+          loginWithSteam({
+            nickname: 'BlazeMaster',
+            realName: 'Alexander Vance',
+            steamId: '76561198299104812',
+            avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
+            country: 'ru',
+            teamName: 'Phoenix Rising',
+            teamSlug: 'phoenix-rising',
+            role: 'captain',
+          });
+          showToast('Профиль успешно создан через Steam!', 'success');
+          navigate('/profile');
+        }}
       >
         <SteamIcon size={20} />
         <span>Зарегистрироваться через Steam</span>
@@ -216,12 +227,6 @@ const SignUpForm: React.FC = () => {
           {submitting ? 'Создание аккаунта…' : 'Зарегистрироваться'}
         </button>
       </form>
-
-      <SteamAuthModal
-        isOpen={showSteamModal}
-        onClose={() => setShowSteamModal(false)}
-        isRegister={true}
-      />
     </>
   );
 };

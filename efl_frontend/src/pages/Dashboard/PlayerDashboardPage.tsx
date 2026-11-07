@@ -27,7 +27,6 @@ import { useToast } from '@/context/ToastContext';
 import CoinIcon from '@/components/ui/CoinIcon/CoinIcon';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
 import CountryFlag from '@/components/ui/CountryFlag/CountryFlag';
-import SteamAuthModal from '../Auth/components/SteamAuthModal';
 import './PlayerDashboardPage.css';
 
 type DashboardTab = 'overview' | 'profile' | 'config' | 'gear' | 'accounts' | 'matches';
@@ -84,7 +83,7 @@ const PRESET_AVATARS = [
 ];
 
 const PlayerDashboardPage: React.FC = () => {
-  const { currentUser, logoutUser, updateUserProfile, teams, matches, openWallet, marketBalance } = useData();
+  const { currentUser, loginWithSteam, logoutUser, updateUserProfile, teams, matches, openWallet, marketBalance } = useData();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const avatarFileInputRef = useRef<HTMLInputElement>(null);
@@ -111,7 +110,6 @@ const PlayerDashboardPage: React.FC = () => {
   const [copiedProfileLink, setCopiedProfileLink] = useState(false);
   const [checkedInMatches, setCheckedInMatches] = useState<Record<string, boolean>>({});
   const [showAvatarModal, setShowAvatarModal] = useState(false);
-  const [showSteamModal, setShowSteamModal] = useState(false);
   const [avatarUrlInput, setAvatarUrlInput] = useState('');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
@@ -361,7 +359,19 @@ const PlayerDashboardPage: React.FC = () => {
                 type="button"
                 className="steam-main-auth-btn"
                 style={{ width: 'auto', padding: '0.65rem 1.5rem' }}
-                onClick={() => setShowSteamModal(true)}
+                onClick={() => {
+                  loginWithSteam({
+                    nickname: 'BlazeMaster',
+                    realName: 'Alexander Vance',
+                    steamId: '76561198299104812',
+                    avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
+                    country: 'ru',
+                    teamName: 'Phoenix Rising',
+                    teamSlug: 'phoenix-rising',
+                    role: 'captain',
+                  });
+                  showToast('Успешный вход через Steam!', 'success');
+                }}
               >
                 <SteamIcon size={20} />
                 <span>Войти через Steam</span>
@@ -372,7 +382,6 @@ const PlayerDashboardPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <SteamAuthModal isOpen={showSteamModal} onClose={() => setShowSteamModal(false)} />
       </section>
     );
   }
@@ -1328,7 +1337,7 @@ const PlayerDashboardPage: React.FC = () => {
                   type="button"
                   className="btn-outline"
                   style={{ fontSize: '0.75rem', padding: '6px 12px' }}
-                  onClick={() => setShowSteamModal(true)}
+                  onClick={() => showToast('Вы можете изменить Steam URL и Trade URL ниже в полях формы', 'info')}
                 >
                   Сменить Steam аккаунт
                 </button>
@@ -1597,8 +1606,7 @@ const PlayerDashboardPage: React.FC = () => {
           </div>
         )}
 
-        {/* Steam Modal Switcher */}
-        <SteamAuthModal isOpen={showSteamModal} onClose={() => setShowSteamModal(false)} />
+        {/* Avatar Modal */}
       </div>
     </section>
   );

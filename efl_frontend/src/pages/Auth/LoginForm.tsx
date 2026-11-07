@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Shield, User } from 'lucide-react';
 import { useToast } from '@/context/ToastContext';
 import { useData } from '@/context/DataContext';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
-import SteamAuthModal from './components/SteamAuthModal';
 
 interface LoginFormValues {
   email: string;
@@ -40,15 +39,13 @@ function validate(values: LoginFormValues): LoginFormErrors {
 }
 
 const LoginForm: React.FC = () => {
-  const [searchParams] = useSearchParams();
   const [values, setValues] = useState<LoginFormValues>(initialValues);
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
-  const [showSteamModal, setShowSteamModal] = useState(searchParams.get('steam') === '1');
   const [forgotEmail, setForgotEmail] = useState('');
   const { showToast } = useToast();
-  const { loginUser } = useData();
+  const { loginUser, loginWithSteam } = useData();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -105,7 +102,20 @@ const LoginForm: React.FC = () => {
       <button
         type="button"
         className="steam-main-auth-btn"
-        onClick={() => setShowSteamModal(true)}
+        onClick={() => {
+          loginWithSteam({
+            nickname: 'BlazeMaster',
+            realName: 'Alexander Vance',
+            steamId: '76561198299104812',
+            avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
+            country: 'ru',
+            teamName: 'Phoenix Rising',
+            teamSlug: 'phoenix-rising',
+            role: 'captain',
+          });
+          showToast('Успешный вход через Steam!', 'success');
+          navigate('/profile');
+        }}
       >
         <SteamIcon size={20} />
         <span>Войти через Steam</span>
@@ -269,11 +279,7 @@ const LoginForm: React.FC = () => {
         </div>
       )}
 
-      <SteamAuthModal
-        isOpen={showSteamModal}
-        onClose={() => setShowSteamModal(false)}
-        isRegister={false}
-      />
+      {/* Direct Steam login */}
     </>
   );
 };
