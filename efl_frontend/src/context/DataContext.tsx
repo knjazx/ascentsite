@@ -448,10 +448,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return { ...defaultSettings, ...stored };
   });
   const [currentUser, setCurrentUser] = useState<UserAccount | null>(() => {
-    if (typeof window !== 'undefined' && window.location.search.includes('guest=1')) {
-      return null;
-    }
-    return loadStored('currentUser', defaultDemoUser);
+    return loadStored<UserAccount | null>('currentUser', null);
   });
 
   // ── Global Wallet State ──────────────────────────────────────────────────

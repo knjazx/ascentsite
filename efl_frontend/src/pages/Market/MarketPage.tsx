@@ -38,6 +38,7 @@ const sortOptions = [
 
 const MarketPage: React.FC = () => {
   const {
+    currentUser,
     marketOffers,
     marketOrders,
     marketBalance,
@@ -200,19 +201,21 @@ const MarketPage: React.FC = () => {
 
           <div className="market-hero__actions">
             {/* Wallet Balance Display Widget - Opens Player Wallet anywhere */}
-            <div
-              className="market-balance-widget"
-              onClick={openWallet}
-              role="button"
-              tabIndex={0}
-              title="Открыть кошелёк игрока"
-            >
-              <CoinIcon size={32} />
-              <div className="market-balance-widget__info">
-                <span className="market-balance-widget__label">Кошелёк игрока</span>
-                <span className="market-balance-widget__val">{marketBalance.toLocaleString()} AC</span>
+            {currentUser && (
+              <div
+                className="market-balance-widget"
+                onClick={openWallet}
+                role="button"
+                tabIndex={0}
+                title="Открыть кошелёк игрока"
+              >
+                <CoinIcon size={32} />
+                <div className="market-balance-widget__info">
+                  <span className="market-balance-widget__label">Кошелёк игрока</span>
+                  <span className="market-balance-widget__val">{marketBalance.toLocaleString()} AC</span>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Quick Cart Button */}
             <button

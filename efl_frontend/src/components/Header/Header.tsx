@@ -46,15 +46,17 @@ const Header: React.FC = () => {
 
         {/* Desktop Header Actions */}
         <div className="site-header__actions desktop-only">
-          <button
-            type="button"
-            className="header-balance-btn"
-            onClick={openWallet}
-            title="Открыть кошелёк игрока ASCENT"
-          >
-            <CoinIcon size={15} />
-            <span>{marketBalance.toLocaleString()} AC</span>
-          </button>
+          {currentUser && (
+            <button
+              type="button"
+              className="header-balance-btn"
+              onClick={openWallet}
+              title="Открыть кошелёк игрока ASCENT"
+            >
+              <CoinIcon size={15} />
+              <span>{marketBalance.toLocaleString()} AC</span>
+            </button>
+          )}
 
           <div className="lang-toggle" title="Language: English" style={{ cursor: 'default' }}>
             <Globe size={18} />
@@ -107,18 +109,20 @@ const Header: React.FC = () => {
             </nav>
 
             <div className="mobile-drawer__actions">
-              <button
-                type="button"
-                className="header-balance-btn"
-                style={{ width: '100%', justifyContent: 'center', padding: '10px' }}
-                onClick={() => {
-                  closeMobile();
-                  openWallet();
-                }}
-              >
-                <CoinIcon size={16} />
-                <span>Баланс: {marketBalance.toLocaleString()} AC</span>
-              </button>
+              {currentUser && (
+                <button
+                  type="button"
+                  className="header-balance-btn"
+                  style={{ width: '100%', justifyContent: 'center', padding: '10px' }}
+                  onClick={() => {
+                    closeMobile();
+                    openWallet();
+                  }}
+                >
+                  <CoinIcon size={16} />
+                  <span>Баланс: {marketBalance.toLocaleString()} AC</span>
+                </button>
+              )}
 
               {currentUser ? (
                 <Link to="/profile" className="btn-primary mobile-drawer__btn" onClick={closeMobile}>
