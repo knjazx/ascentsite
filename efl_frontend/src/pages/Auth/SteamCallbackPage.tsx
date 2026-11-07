@@ -4,7 +4,7 @@ import { useData } from '@/context/DataContext';
 import { useToast } from '@/context/ToastContext';
 import type { PlayerProfile } from '@/types';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
-import { extractSteamIdFromClaimedId } from '@/utils/steamAuth';
+import { extractSteamIdFromClaimedId, fetchSteamProfile } from '@/utils/steamAuth';
 import './SteamCallbackPage.css';
 
 export const SteamCallbackPage: React.FC = () => {
@@ -42,30 +42,53 @@ export const SteamCallbackPage: React.FC = () => {
         return;
       }
 
-      setStatusMessage('Верификация SteamID и загрузка данных игрока...');
+      setStatusMessage('Загрузка данных профиля со Steam (ник, аватарка, страна)...');
 
-      // Find if this SteamID matches any known pro/demo player
-      const knownPlayer = players.find(
-        (p): p is PlayerProfile => (p as PlayerProfile).steamId === steamId
-      );
+      (async () => {
+        try {
+          const profile = await fetchSteamProfile(steamId);
 
-      // Perform login in DataContext
-      setTimeout(() => {
-        const user = loginWithSteam({
-          steamId,
-          nickname: knownPlayer?.nickname || `Player_${steamId.slice(-4)}`,
-          realName: knownPlayer?.realName || '',
-          avatar:
-            knownPlayer?.avatar ||
-            `https://api.dicebear.com/7.x/bottts/svg?seed=${steamId}&backgroundColor=111111`,
-          country: knownPlayer?.country || 'ru',
-          teamName: knownPlayer?.team || '',
-          role: 'player',
-        });
+          // Find if this SteamID matches any known pro/demo player
+          const knownPlayer = players.find(
+            (p): p is PlayerProfile => (p as PlayerProfile).steamId === steamId
+          );
 
-        showToast(`Успешный вход через Steam! Добро пожаловать, ${user.nickname}!`, 'success');
-        navigate(redirectTarget, { replace: true });
-      }, 700);
+          const finalNickname =
+            profile.nickname && !profile.nickname.startsWith('Player_')
+              ? profile.nickname
+              : knownPlayer?.nickname || profile.nickname || `Player_${steamId.slice(-4)}`;
+
+          const finalAvatar =
+            profile.avatar && !profile.avatar.includes('dicebear')
+              ? profile.avatar
+              : knownPlayer?.avatar || profile.avatar;
+
+          const finalCountry = profile.country || knownPlayer?.country || 'ru';
+          const finalRealName = profile.realName || knownPlayer?.realName || '';
+
+          const user = loginWithSteam({
+            steamId,
+            nickname: finalNickname,
+            realName: finalRealName,
+            avatar: finalAvatar,
+            country: finalCountry,
+            teamName: knownPlayer?.team || '',
+            role: 'player',
+          });
+
+          showToast(`Успешный вход через Steam! Добро пожаловать, ${user.nickname}!`, 'success');
+          navigate(redirectTarget, { replace: true });
+        } catch (err) {
+          console.error('[SteamCallbackPage] Error fetching steam profile:', err);
+          const user = loginWithSteam({
+            steamId,
+            nickname: `Player_${steamId.slice(-4)}`,
+            country: 'ru',
+          });
+          showToast(`Успешный вход через Steam! Добро пожаловать, ${user.nickname}!`, 'success');
+          navigate(redirectTarget, { replace: true });
+        }
+      })();
       return;
     }
 

@@ -2,6 +2,19 @@
    PlayerDashboardPage.css — ASCENT CS2 League Native Profile Hub & Editor
    ========================================================================== */
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-animation {
+  animation: spin 1s linear infinite;
+}
+
 .dashboard-page {
   padding-bottom: var(--space-8);
 }

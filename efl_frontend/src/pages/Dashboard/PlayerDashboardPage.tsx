@@ -20,14 +20,15 @@ import {
   Swords,
   Globe,
   Flame,
-  CheckSquare
+  CheckSquare,
+  RefreshCw
 } from 'lucide-react';
 import { useData } from '@/context/DataContext';
 import { useToast } from '@/context/ToastContext';
 import CoinIcon from '@/components/ui/CoinIcon/CoinIcon';
 import SteamIcon from '@/components/ui/SteamIcon/SteamIcon';
 import CountryFlag from '@/components/ui/CountryFlag/CountryFlag';
-import { redirectToSteam } from '@/utils/steamAuth';
+import { redirectToSteam, fetchSteamProfile } from '@/utils/steamAuth';
 import './PlayerDashboardPage.css';
 
 type DashboardTab = 'overview' | 'profile' | 'config' | 'gear' | 'accounts' | 'matches';
@@ -208,6 +209,60 @@ const PlayerDashboardPage: React.FC = () => {
       }));
     }
   }, [currentUser]);
+
+  // Steam profile sync state & handlers
+  const [isSyncingSteam, setIsSyncingSteam] = useState(false);
+  const autoSyncedRef = useRef(false);
+
+  const handleSyncWithSteam = async (silent: boolean = false) => {
+    if (!currentUser?.steamId || isSyncingSteam) return;
+    setIsSyncingSteam(true);
+    try {
+      const profile = await fetchSteamProfile(currentUser.steamId);
+      const updates: Record<string, any> = {};
+
+      if (profile.nickname && !profile.nickname.startsWith('Player_') && profile.nickname !== currentUser.nickname) {
+        updates.nickname = profile.nickname;
+      }
+      if (profile.avatar && !profile.avatar.includes('dicebear') && profile.avatar !== currentUser.avatar) {
+        updates.avatar = profile.avatar;
+      }
+      if (profile.country && profile.country !== currentUser.country) {
+        updates.country = profile.country;
+      }
+      if (profile.realName && profile.realName !== currentUser.realName) {
+        updates.realName = profile.realName;
+      }
+
+      if (Object.keys(updates).length > 0) {
+        updateUserProfile(updates);
+        setFormData((prev) => ({ ...prev, ...updates }));
+        if (!silent) {
+          showToast('Данные профиля (ник, аватар, страна) успешно обновлены из Steam!', 'success');
+        }
+      } else if (!silent) {
+        showToast('Профиль уже синхронизирован с актуальными данными Steam.', 'info');
+      }
+    } catch (err) {
+      console.warn('[PlayerDashboardPage] Steam sync error:', err);
+      if (!silent) {
+        showToast('Не удалось получить обновленные данные со Steam.', 'error');
+      }
+    } finally {
+      setIsSyncingSteam(false);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      currentUser?.steamId &&
+      !autoSyncedRef.current &&
+      (currentUser.nickname.startsWith('Player_') || currentUser.avatar?.includes('dicebear'))
+    ) {
+      autoSyncedRef.current = true;
+      handleSyncWithSteam(true);
+    }
+  }, [currentUser?.steamId, currentUser?.nickname, currentUser?.avatar]);
 
   const updateField = (key: keyof typeof formData, value: any) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -481,6 +536,19 @@ const PlayerDashboardPage: React.FC = () => {
                   <CoinIcon size={13} />
                   <span>Кошелёк ({marketBalance.toLocaleString()} AC)</span>
                 </button>
+
+                {currentUser?.steamId && (
+                  <button
+                    type="button"
+                    className="pp-social-btn"
+                    onClick={() => handleSyncWithSteam(false)}
+                    disabled={isSyncingSteam}
+                    title="Синхронизировать никнейм, аватарку и страну из Steam"
+                  >
+                    <RefreshCw size={13} className={isSyncingSteam ? 'spin-animation' : ''} />
+                    <span>{isSyncingSteam ? 'Обновление...' : 'Обновить со Steam'}</span>
+                  </button>
+                )}
 
                 <button
                   type="button"
